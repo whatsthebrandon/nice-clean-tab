@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Search:</title>
+        <link rel="icon" href="icon.png">
+        <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Allerta+Stencil" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+        <style>
+            #body{
+                overflow:hidden;
+                background-size:cover;
+                background-image:url(back1.png);
+                background-repeat: no-repeat;
+                background-position:center;
+                height:1000px;
+                font-family: 'Open Sans', sans-serif;
+            }
+            #center{
+                position:absolute;
+                top:0px;
+                left:0px;
+                width:100%;
+                height:100%;
+            }
+            #search-div{
+                position:relative;
+                top:25px;
+                width:30%;
+                height:50px;
+                border-radius:25px;
+                background-color:#000000;
+                opacity:.5;
+                transition:.4s;
+                border:2px solid #000000;
+            }
+            #search-div:hover, #search:hover{
+                border-radius:15px;
+            }
+            #search{
+                position:relative;
+                top:10%;
+                width:95%;
+                height:75%;
+                background-color:white;
+                border:none;
+                border-radius:25px;
+                font-size:18px;
+                font-weight: 500;
+                padding-left:10px;
+                outline:none;
+                transition:.4s;
+            }
+            #apps-area{
+                position:fixed;
+                left:5%;
+                bottom:25px;
+                height:100px;
+                width:90%;
+                min-width:600px;
+                border-radius:25px;
+                transition:.4s;
+                overflow:hidden;
+            }
+            #apps-area:hover{
+                height:215px;
+            }
+            #opacity{
+                width:100%;
+                height:100%;
+                position:absolute;
+                top:0px;
+                left:0px;
+                border-radius:25px;
+                background-color:white;
+                opacity:.5;
+            }
+            #apps{
+                width:100%;
+                height:100%;
+            }
+            #button0{
+                position:relative;
+                top:5px;
+                width:90px;
+                height:90px;
+                background-color:#dddddd;
+                border-radius:25px;
+                border:none;
+                outline:none;
+                transition:.4s;
+                cursor:pointer;
+            }
+            #button0:hover{
+                background-color:#595959;
+            }
+            #button1{
+                position:absolute;
+                top:5px;
+                right:25%;
+                width:90px;
+                height:90px;
+                background-color:#dddddd;
+                border-radius:25px;
+                border:none;
+                outline:none;
+                transition:.4s;
+                cursor:pointer;
+            }
+            #button1:hover{
+                background-color:#595959;
+            }
+            #button-2{
+                position:absolute;
+                top:5px;
+                left:5%;
+                width:90px;
+                height:90px;
+                background-color:#dddddd;
+                border-radius:25px;
+                border:none;
+                outline:none;
+                transition:.4s;
+                cursor:pointer;
+            }
+            #button-2:hover{
+                background-color:#595959;
+            }
+            #button-1{
+                position:absolute;
+                top:5px;
+                left:25%;
+                width:90px;
+                height:90px;
+                background-color:#dddddd;
+                border-radius:25px;
+                border:none;
+                outline:none;
+                transition:.4s;
+                cursor:pointer;
+            }
+            #button-1:hover{
+                background-color:#595959;
+            }
+            #button2{
+                position:absolute;
+                top:5px;
+                right:5%;
+                width:90px;
+                height:90px;
+                background-color:#dddddd;
+                border-radius:25px;
+                border:none;
+                outline:none;
+                transition:.4s;
+                cursor:pointer;
+            }
+            #button2:hover{
+                background-color:#595959;
+            }
+            #button6{
+                position:relative;
+                top:5px;
+                width:90px;
+                height:90px;
+                background-color:#dddddd;
+                border-radius:25px;
+                border:none;
+                outline:none;
+                transition:.4s;
+                cursor:pointer;
+            }
+            #settings-btn{
+                position:absolute;
+                top:50px;
+                right:50px;
+                width:50px;
+                height:50px;
+                border:none;
+                border-radius:50%;
+                background-color:Transparent;
+                box-shadow: inset 0px 0px 15px 10px white;
+                transition:.4s;
+                opacity:.5;
+                outline:none;
+                cursor:pointer;
+            }
+            #settings-btn:hover{
+                opacity:.8;
+                Transform:scale(1.2)rotate(90deg);
+            }
+            #clearbtn{
+                position:absolute;
+                top:150px;
+                right:-50px;
+                width:100px;
+                height:50px;
+                border:none;
+                border-top-left-radius:50px;
+                border-bottom-left-radius:50px;
+                background-color:white;
+                transition:.4s;
+                opacity:.5;
+                outline:none;
+                cursor:pointer;
+            }
+            #clearbtn:hover{
+                opacity:.8;
+                right:0px;
+            }
+            #showbtn{
+                position:absolute;
+                bottom:25px;
+                right:-50px;
+                width:100px;
+                height:50px;
+                border:none;
+                border-top-left-radius:50px;
+                border-bottom-left-radius:50px;
+                background-color:white;
+                transition:.4s;
+                opacity:.05;
+                outline:none;
+                cursor:pointer;
+            }
+            #showbtn:hover{
+                right:0px;
+                opacity:.8;
+            }
+            @keyframes rotate {
+                from {transform: rotate(0deg);}
+                to {transform: rotate(360deg);}
+            }
+            #settings-panel{
+                position:relative;
+                left:100%;
+                top:-37.5%;
+                width:40%;
+                height:50%;
+                background-color:white;
+                opacity:.6;
+                border-radius:25px;
+                animation-name:null;
+                animation-duration:.5s;
+                animation-fill-mode:forwards;
+                overflow:auto;
+            }
+            @keyframes openset{
+                0%{left:100%;}
+                50%{left:15%;}
+                100%{left:20%;}
+            }
+            @keyframes closeset{
+                100%{left:100%;}
+                50%{left:15%;}
+                0%{left:20%;}
+            }
+            #clock{
+                position:relative;
+                font-size:120px;
+                top:80px;
+                margin-top:0px;
+                font-family: 'Pacifico', cursive;
+                text-shadow: 0px 0px 100px white;
+                background-clip:text;
+                transition:.4s;
+            }
+            @font-face{
+                font-family: cal;
+                src: url("fonts/Calculator.ttf");
+            }
+            #school-schedule{
+                position:absolute;
+                top:50px;
+                left:50px;
+                width:10px;
+                height:10px;
+                transition:.4s;
+            }
+            #school-schedule1{
+                position:absolute;
+                top:50px;
+                left:112.5px;
+                width:10px;
+                height:10px;
+                transition:.4s;
+            }
+            #schedule1{
+                cursor:pointer;position:absolute;top:0px;left:0px;width:50px;height:50px;background-color:white;border:5px solid black;border-radius:25px;opacity:.7;transition:.4s;
+            }
+            #schedule1:hover{
+                border-radius:15px;
+                Transform:scale(1.2);
+            }
+            #close-settings{
+                outline:none;border:none;background-color:Transparent;position:absolute;top:5px;right:5px;width:40px;height:40px;transition:.4s;
+            }
+            #close-settings:hover{
+                width:45px;height:45px;
+            }
+            #gretting{
+                position:absolute;
+                top:25px;
+                right:12%;
+                font-family: 'Open Sans', sans-serif;
+                transition:.4s;
+                font-size:22px;
+            }
+            #gretting:hover{
+                font-size:28px;
+            }
+            #profile{
+                position:relative;
+                right:100%;
+                top:12.5%;
+                width:300px;
+                height:50%;
+                background-color:white;
+                opacity:.6;
+                border-radius:25px;
+                animation-name:null;
+                animation-duration:.5s;
+                animation-fill-mode:forwards;
+                overflow:auto;
+            }
+            @keyframes openpro{
+                0%{right:100%;}
+                50%{right:25%;}
+                100%{right:30%;}
+            }
+            @keyframes closepro{
+                100%{right:100%;}
+                50%{right:25%;}
+                0%{right:30%;}
+            }
+            #profilepic{
+                position:relative;
+                width:80px;
+                height:80px;
+                border:5px solid black;
+                outline:none;
+                background-color:Transparent;
+                border-radius:50%;
+            }
+            #name{
+                position:relative;
+                height:50%;
+                top:20px;
+                width:60%;
+                border-radius:25px;
+                font-size:20px;
+                border:3px solid black;
+                transition:.4s;
+                outline:none;
+            }
+            #name:hover{
+                width:70%;
+                background-color:lightgrey;
+            }
+            #name:focus{
+                background-color:lightgrey;
+            }
+            #nameok{
+                position:relative;
+                height:50%;
+                top:20px;
+                width:25%;
+                border-radius:25px;
+                font-size:20px;
+                border:3px solid black;
+                transition:.4s;
+                outline:none;
+            }
+            #nameok:hover{
+                width:30%;
+                background-color:lightgrey;
+            }
+            #clockssdiv{
+                position:absolute;
+                bottom:100%; /*40%-100%*/
+                left:10%; /*10%-60%*/
+            }
+            #clockss{
+                position:absolute;
+                font-size:80px;
+                top:0px;
+                left:0px;
+                transition:.4s;
+                opacity:0;
+                text-shadow: 0 0 50px white;
+            }
+        </style>
+    </head>
+    <body id="body">
+        <center>
+            <div id="center">
+                <div id="school-schedule">
+                    <a href="http://johnmarshall.rochester.k12.mn.us/UserFiles/Servers/Server_3086949/File/2018-2019%20Schedule/Daily%20Schedule.pdf" target="_blank"><button id="schedule1" title="Daily Schedule"><img src="schedule.png" style="position:relative;top:0px;left:2px;width:100%;height:auto;"></img></button></a>
+                </div>
+                <div id="school-schedule1">
+                    <a href="http://johnmarshall.rochester.k12.mn.us/UserFiles/Servers/Server_3086949/File/2018-2019%20Schedule/Tuesday%20Schedule.pdf" target="_blank"><button id="schedule1" title="Tuesday Schedule"><img src="schedule.png" style="position:relative;top:0px;left:2px;width:100%;height:auto;"></img></button></a>
+                </div>
+                <button title="Settings" onclick="settings()" id="settings-btn"><img src="settings.png" style="position:absolute;top:10%;left:10%;width:80%;height:80%;"></img></button>
+                <button title="Clear Mode" onclick="clearmode()" id="clearbtn"><img src="clear.png" style="position:absolute;top:12.5%;left:10%;width:auto;height:75%;"></img><p style="position:absolute;font-size:18px;right:4px;top:-5px;">Clear</p></button>
+                <button title="Show Mode" onclick="showmode()" id="showbtn"><img src="show.png" style="position:absolute;top:10%;left:10%;width:auto;height:80%;"></img><p style="position:absolute;font-size:18px;right:4px;top:-5px;">Show</p></button>
+                <div id="search-div">
+                    <input id="search" placeholder="Google Search: " type="text" onclick="search()"/>
+                </div>
+                <h2 id="gretting">Sign In<button onclick="profile()" style="cursor:pointer;width:100%;height:50px;position:absolute;top:0px;left:0px;background-color:Transparent;border:none;outline:none;"></button></h2>
+                <div style="position:absolute;top:0px;left:0px;width:100%;height:100%;z-index:-1;">
+                    <h3 id="clock"></h3>
+                </div>
+                <div style="position:absolute;top:0px;left:0px;width:100%;height:100%;z-index:-2;">
+                    <div id="clockssdiv"><h1 id="clockss">Clock</h1></div>
+                </div>
+                <div id="apps-area">
+                    <div id="opacity"></div>
+                    <div id="apps">
+                        <a href="http://www.google.com" target="_blank"><button title="Google" id="button0"><img src="google.png" style="position:relative;top:0px;left:0px;width:auto;height:80%;"></img></button></a>
+                        <a href="http://www.facebook.com" target="_blank"><button title="Facebook" id="button-2"><img src="facebook.png" style="position:relative;top:0px;left:0px;width:auto;height:80%;"></img></button></a>
+                        <a href="http://www.instagram.com" target="_blank"><button title="Instagram" id="button-1"><img src="instagram.png" style="position:relative;top:0px;left:0px;width:auto;height:80%;"></img></button></a>
+                        <a href="http://www.gmail.com" target="_blank"><button title="Gmail" id="button1"><img src="gmail.png" style="position:relative;top:0px;left:0px;width:auto;height:82%;"></img></button></a>
+                        <a href="http://www.classroom.google.com" target="_blank"><button title="Classroom" id="button2"><img src="classroom.png" style="position:relative;top:0px;left:0px;width:auto;height:70%;"></img></button></a>
+                        <div style="position:absolute;top:112.5px;left:0px;width:100%;height:100%;background-color:Transparent;"><a href="about:blank" target="_blank"><button title="blank" id="button6"><img src="edit.png" style="position:relative;top:0px;left:5%;width:80%;height:auto;"></img></button></a></div>
+                    </div>
+                </div>
+                <div id="profile">
+                    <div style="position:sticky;width:50%;height:0px;left:50%;top:0px;"><button onclick="closeprofile()" id="close-settings"><img style="position:absolute;top:0px;left:0px;width:auto;height:100%;" src="Close0.png"></img></button></div>
+                    <h1>Profile:</h1>
+                    <div style="position:absolute;top:80px;left:0px;height:80px;width:100%;"><button id="profilepic"><img style="position:relative;top:0px;left:0px;width:90%;height:auto;" src="profile.png"></img></button></div>
+                    <div style="position:absolute;top:60%;left:0px;height:80px;width:100%;">
+                        <input id="name" placeholder="Name"/>
+                        <button onclick="profilename()" id="nameok">Ok</button>
+                    </div>
+                    <p style="position:absolute;bottom:0px;right:20px;">v.1.0 Day 34</p>
+                </div>
+                <div id="settings-panel" style="font-family:Arial, Helvetica, sans-serif;">
+                    <div style="position:sticky;width:50%;height:0px;left:50%;top:0px;"><button onclick="closesettings()" id="close-settings"><img style="position:absolute;top:0px;left:0px;width:auto;height:100%;" src="Close0.png"></img></button></div>
+                    <h1>Settings:</h1>
+                    <h3 style="display:inline-block;">Theme:</h3>
+                    <select id="theme" onchange="themechange()">
+                        <option>Custom URL</option>
+                        <option>FireWatch 1</option>
+                        <option>FireWatch 2</option>
+                        <option>FireWatch 3</option>
+                        <option>Dog</option>
+                        <option>Space</option>
+                    </select>
+                    <br><br>
+                    <input id="url" placeholder="Custom URL:" />
+                    <a href="https://images.google.com/" target="_blank"><button>Browse Images</button></a>
+                    <br><br>
+                    <h3 style="display:inline-block;">Clock Position:</h3>
+                    <input oninput="clockpos()" id="clockpos" type="range" min="1" max="3" value="1">
+                    <br><br>
+                    <h3 style="display:inline-block;">Clock Size:</h3>
+                    <input style="display:inline-block;" ondblclick="clocksizereset()" oninput="clocksize()" id="clocksize" type="range" min="60" max="240" value="120">
+                    <h2 style="display:inline-block;" id="sizeval"></h2>
+                    <br><br>
+                    <h3 style="display:inline-block;">Clock Color:</h3>
+                    <select id="clockcolor" onchange="clockcolor()">
+                        <option>Black</option>
+                        <option>White</option>
+                        <option>Blue</option>
+                        <option>Yellow</option>
+                        <option>Green</option>
+                        <option>Limegreen</option>
+                    </select>
+                    <br><br>
+                    <h3 style="display:inline-block;">Clock Font:</h3>
+                    <select id="clockfont" onchange="clockfont()">
+                        <option>Default</option>
+                        <option>Old Clock</option>
+                        <option>Stencil</option>
+                        <option>Exo</option>
+                    </select>
+                    <br><br><br>
+                </div>
+            </div>
+        </center>
+        <div style="display:none">
+            <img src="back1.png"></img>
+            <img src="back2.png"></img>
+            <img src="back3.png"></img>
+            <img src="back4.png"></img>
+        </div>
+        <script>
+            // onload function
+            document.getElementById("clock").innerHTML = "00:00";
+            document.getElementById("clockss").innerHTML = document.getElementById("clock").innerHTML;
+            document.getElementById("theme").value = "FireWatch 1";
+            document.getElementById("url").value = window.localStorage.getItem("URL");
+            document.getElementById("theme").value = window.localStorage.getItem("background");
+            document.getElementById("sizeval").innerHTML = document.getElementById("clocksize").value + "px";
+            document.getElementById("clockcolor").value = "Black";
+            document.getElementById("showbtn").style.right = "-100px";
+            document.getElementById("clock").style.fontSize = window.localStorage.getItem("clocksize");
+            document.getElementById("sizeval").value = window.localStorage.getItem("clocksizepx");
+            document.getElementById("clocksize").value = window.localStorage.getItem("clocksizeslider");
+            document.getElementById("clock").style.color = window.localStorage.getItem("clockcolor");
+            document.getElementById("clockcolor").value = window.localStorage.getItem("clockcolordrop");
+            if(document.getElementById("name").value != ""){
+                document.getElementById("gretting").innerHTML = "Hello, " + document.getElementById("name").value + '<button onclick="profile()" style="cursor:pointer;width:100%;height:50px;position:absolute;top:0px;left:0px;background-color:Transparent;border:none;outline:none;"></button>';
+            }
+            themechange();
+            // end of function
+            function profilename(){
+                if(document.getElementById("name").value != ""){
+                    document.getElementById("gretting").innerHTML = "Hello, " + document.getElementById("name").value + '<button onclick="profile()" style="width:100%;height:50px;position:absolute;top:0px;left:0px;background-color:Transparent;border:none;outline:none;"></button>';
+                }
+                else{
+                    document.getElementById("gretting").innerHTML = "Sign In" + '<button onclick="profile()" style="cursor:pointer;width:100%;height:50px;position:absolute;top:0px;left:0px;background-color:Transparent;border:none;outline:none;"></button>';
+                }
+            }
+            var open2 = false;
+            function profile(){
+                if(open2 == false){
+                    document.getElementById("profile").style.animationName = "openpro";
+                    open2 = true;
+                }
+                else{
+                    document.getElementById("profile").style.animationName = "closepro";
+                    open2 = false;
+                }
+            }
+            function closeprofile(){
+                document.getElementById("profile").style.animationName = "closepro";
+                open2 = false;
+            }
+            function clockfont(){
+                if(document.getElementById("clockfont").value == "Old Clock"){
+                    document.getElementById("clock").style.fontFamily = "cal";
+                }
+                else if(document.getElementById("clockfont").value == "Stencil"){
+                    document.getElementById("clock").style.fontFamily = "'Allerta Stencil', sans-serif";
+                }
+                else if(document.getElementById("clockfont").value == "Exo"){
+                    document.getElementById("clock").style.fontFamily = "'Exo', sans-serif";
+                }
+                else{
+                    document.getElementById("clock").style.fontFamily = "'Pacifico', cursive";
+                }
+            }
+            var startclockss = true;
+            function clearmode(){
+                document.getElementById("school-schedule").style.left = "-50px";
+                document.getElementById("school-schedule1").style.top = "-50px";
+                document.getElementById("apps-area").style.bottom = "-100px";
+                document.getElementById("search-div").style.top = "-60px";
+                document.getElementById("settings-btn").style.right = "-50px";
+                document.getElementById("clearbtn").style.right = "-100px";
+                document.getElementById("showbtn").style.right = "";
+                document.getElementById("gretting").style.top = "-50px"
+                document.getElementById("clock").style.top = "-360px";
+                document.getElementById("clockss").style.display = "block";
+                setTimeout(function(){
+                    document.getElementById("clockss").style.opacity = ".6";
+                },1000);
+                if(startclockss == true){
+                    setInterval(changeposclockss, 20000);
+                }
+                startclockss = false;
+            }
+            function changeposclockss(){
+                document.getElementById("clockss").style.opacity = "0";
+                setTimeout(function(){
+                    var left = Math.floor(Math.random() * 61) + 10;
+                    var bottom = Math.floor(Math.random() * 61) + 40;
+                    document.getElementById("clockssdiv").style.bottom = bottom + "%";
+                    document.getElementById("clockssdiv").style.left = left + "%";
+                    setTimeout(function() {
+                        document.getElementById("clockss").style.opacity = ".6";
+                    },1000);
+                },400);
+            }
+            function showmode(){
+                document.getElementById("clockss").style.opacity = "0";
+                setTimeout(function(){
+                    document.getElementById("clockss").style.display = "none";
+                    document.getElementById("school-schedule").style.left = "50px";
+                    document.getElementById("school-schedule1").style.top = "50px";
+                    document.getElementById("apps-area").style.bottom = "25px";
+                    document.getElementById("search-div").style.top = "25px";
+                    document.getElementById("settings-btn").style.right = "50px";
+                    document.getElementById("showbtn").style.right = "-100px";
+                    document.getElementById("clearbtn").style.right = "";
+                    document.getElementById("gretting").style.top = "25px";
+                    document.getElementById("clock").style.top = "80px";
+                }, 200);
+            }
+            function closesettings(){
+                document.getElementById("settings-panel").style.animationName = "closeset";
+                open = false;
+            }
+            function clockcolor(){
+                document.getElementById("clock").style.color = document.getElementById("clockcolor").value;
+                window.localStorage.setItem("clockcolor", document.getElementById("clock").style.color);
+                window.localStorage.setItem("clockcolordrop", document.getElementById("clockcolor").value);
+            }
+            function clocksizereset(){
+                document.getElementById("clock").style.fontSize = "120px";
+                document.getElementById("clocksize").value = "120";
+                document.getElementById("sizeval").innerHTML = document.getElementById("clocksize").value + "px";
+                window.localStorage.setItem("clocksizeslider", document.getElementById("clocksize").value);
+                window.localStorage.setItem("clocksizepx", document.getElementById("sizeval").value);
+                window.localStorage.setItem("clocksize", document.getElementById("clock").style.fontSize);
+            }
+            function clocksize(){
+                var fontsize = document.getElementById("clocksize").value;
+                document.getElementById("clock").style.fontSize = fontsize + "px";
+                document.getElementById("sizeval").innerHTML = document.getElementById("clocksize").value + "px";
+                window.localStorage.setItem("clocksizeslider", document.getElementById("clocksize").value);
+                window.localStorage.setItem("clocksizepx", document.getElementById("sizeval").value);
+                window.localStorage.setItem("clocksize", document.getElementById("clock").style.fontSize);
+            }
+            function clockpos(){
+                var pos = document.getElementById("clockpos").value;
+                var yeet = document.getElementById("clock").style;
+                if(pos == 1){
+                    yeet.position = "absolute";
+                    yeet.right = "";
+                    yeet.left = "6%";
+                }
+                if(pos == 2){
+                    yeet.position = "relative";
+                    yeet.left = "";
+                    yeet.right = "";
+                }
+                if(pos == 3){
+                    yeet.position = "absolute";
+                    yeet.left = "";
+                    yeet.right = "6%";
+                }
+            }
+            document.getElementById("search").addEventListener('keypress', function(e){
+                var key = e.which || e.keyCode;
+                if(key === 13){
+                    var term = document.getElementById("search").value;
+                    window.location.href = "https://www.google.com/search?q=" + term;
+                }
+            });
+            var bool = false;
+            function search(){
+                if(bool == false){
+                    document.getElementById("search-div").style.top = "50px";
+                    document.getElementById("search-div").style.width = "60%";
+                    document.getElementById("search-div").style.backgroundColor = "white";
+                    bool = true;
+                }
+                else{
+                    document.getElementById("search-div").style.top = "25px";
+                    document.getElementById("search-div").style.width = "30%";
+                    document.getElementById("search-div").style.backgroundColor = "#000000";
+                    document.getElementById("search").blur();
+                    bool = false;
+                }
+            }
+            function themechange(){
+                var body = document.getElementById("body");
+                var theme = document.getElementById("theme");
+                if(theme.value == "FireWatch 1"){
+                    body.style.backgroundImage = "url(back1.png)";
+                    window.localStorage.setItem("background", "FireWatch 1")
+                }
+                if(theme.value == "FireWatch 2"){
+                    body.style.backgroundImage = "url(back2.png)";
+                    window.localStorage.setItem("background", "FireWatch 2")
+                }
+                if(theme.value == "FireWatch 3"){
+                    body.style.backgroundImage = "url(back3.png)";
+                    window.localStorage.setItem("background", "FireWatch 3")
+                }
+                if(theme.value == "Dog"){
+                    body.style.backgroundImage = "url(https://hips.hearstapps.com/ghk.h-cdn.co/assets/16/11/gettyimages-136544176.jpg)";
+                    window.localStorage.setItem("background", "Dog")
+                }
+                if(theme.value == "Space"){
+                    body.style.backgroundImage = "url(space.jpeg)";
+                    window.localStorage.setItem("background", "Space")
+                }
+                if(theme.value == "Custom URL"){
+                    body.style.backgroundImage = "url(" + document.getElementById("url").value + ")";
+                    window.localStorage.setItem("background", "Custom URL")
+                    window.localStorage.setItem("URL", document.getElementById("url").value)
+                }
+            }
+            var open = false;
+            function settings(){
+                if(open == false){
+                    document.getElementById("settings-panel").style.animationName = "openset";
+                    open = true;
+                }
+                else{
+                    document.getElementById("settings-panel").style.animationName = "closeset";
+                    open = false;
+                }
+            }
+            setInterval(function(){
+                var d = new Date();
+                document.getElementById("clockss").innerHTML = document.getElementById("clock").innerHTML;
+                if(d.getHours() == 0){
+                    d.setHours(12);
+                }
+                else if(d.getHours() == 1){
+                    d.setHours(01);
+                }
+                else if(d.getHours() == 2){
+                    d.setHours(02);
+                }
+                else if(d.getHours() == 3){
+                    d.setHours(03);
+                }
+                else if(d.getHours() == 4){
+                    d.setHours(04);
+                }
+                else if(d.getHours() == 5){
+                    d.setHours(05);
+                }
+                else if(d.getHours() == 6){
+                    d.setHours(06);
+                }
+                else if(d.getHours() == 7){
+                    d.setHours(07);
+                }
+                else if(d.getHours() == 8){
+                    d.setHours(08);
+                }
+                else if(d.getHours() == 9){
+                    d.setHours(09);
+                }
+                else if(d.getHours() == 10){
+                    d.setHours(10);
+                }
+                else if(d.getHours() == 11){
+                    d.setHours(11);
+                }
+                else if(d.getHours() == 12){
+                    d.setHours(12);
+                }
+                else if(d.getHours() == 13){
+                    d.setHours(01);
+                }
+                else if(d.getHours() == 14){
+                    d.setHours(02);
+                }
+                else if(d.getHours() == 15){
+                    d.setHours(03);
+                }
+                else if(d.getHours() == 16){
+                    d.setHours(04);
+                }
+                else if(d.getHours() == 17){
+                    d.setHours(05);
+                }
+                else if(d.getHours() == 18){
+                    d.setHours(06);
+                }
+                else if(d.getHours() == 19){
+                    d.setHours(07);
+                }
+                else if(d.getHours() == 20){
+                    d.setHours(08);
+                }
+                else if(d.getHours() == 21){
+                    d.setHours(09);
+                }
+                else if(d.getHours() == 22){
+                    d.setHours(10);
+                }
+                else if(d.getHours() == 23){
+                    d.setHours(11);
+                }
+                if(d.getHours() < 10){
+                    if(d.getMinutes() < 10){
+                        document.getElementById("clock").innerHTML = "0" + d.getHours() + ":" + "0" + d.getMinutes();
+                    }
+                    else{
+                        document.getElementById("clock").innerHTML = "0" + d.getHours() + ":" + d.getMinutes();
+                    }
+                }
+                else{
+                    if(d.getMinutes() < 10){
+                        document.getElementById("clock").innerHTML = d.getHours() + ":" + "0" + d.getMinutes();
+                    }
+                    else{
+                        document.getElementById("clock").innerHTML = d.getHours() + ":" + d.getMinutes();
+                    }
+                }
+            }, 1000);
+        </script>
+    </body>
+</html>
